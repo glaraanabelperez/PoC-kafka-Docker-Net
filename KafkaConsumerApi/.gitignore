@@ -1,0 +1,41 @@
+﻿# Archivos de Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos de compilación
+bin/
+obj/
+out/
+
+# Archivos de solución y proyecto
+*.sln.ide
+*.VC.db
+*.VC.opendb
+
+# Archivos temporales de Rider/ReSharper
+.idea/
+*.DotSettings.user
+
+# Archivos del sistema
+*.DS_Store
+*.log
+Thumbs.db
+
+# Archivos de dependencias NuGet
+packages/
+*.nupkg
+project.lock.json
+
+# Configuración de VS
+ProjectSettings.json
+VSWorkspaceState.json
+
+# SQLite (si no es parte de tu fuente)
+*.sqlite
+
+# Docker y configuración local
+.env
+docker-compose.override.yml
