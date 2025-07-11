@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    volumes:
+      - zookeeper_data:/bitnami/zookeeper
+
+  kafka:
+    image: bitnami/kafka:3.6.1
+    hostname: kafka
+    ports:
+      - "9092:9092" # Para clientes externos (tu máquina local)
+      - "29092:29092" # Un puerto interno para clientes Docker (se mapea a sí mismo)
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ENABLE_KRAFT=no
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,INSIDE://:29092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,INSIDE:PLAINTEXT # Mapeo de protocolos
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT 
+      - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1
+      - KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR=1
+      - KAFKA_CFG_BROKER_ID=1
+    volumes:
+      - kafka_data:/bitnami/kafka
+
+
+  # Nuevo servicio para la API REST de .NET
+  dotnet-consumer-api:
+    build:
+      context: ./KafkaConsumerApi # Asegúrate que esta ruta sea correcta a tu proyecto .NET
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8082" # O el puerto que tu API use, ej. 5000 para HTTPS o 80 para HTTP
+      - "5005:5005"  # puerto debug opcional
+
+    depends_on:
+      - kafka # La API REST depende de que Kafka esté levantado
+    environment:
+      # Pasa las configuraciones de Kafka a la API
+      - Kafka__BootstrapServers=kafka:29092 # ¡Clave! Nombre del servicio Kafka y puerto interno
+      - Kafka__Topic=mi-topic
+      - Kafka__GroupId=my-consumer-group
+      - ASPNETCORE_URLS=http://+:8082
+      - ASPNETCORE_ENVIRONMENT=Production
+
+
+
+
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local
