@@ -14,7 +14,7 @@ La solución está preparada para funcionar:
 
 ##LEVANTAR TODOS LOS PROCESOS Y LA API
 
-## 0 CONFIGURACIONES:
+## CONFIGURACIONES:
 	## INSTALAR DOCKER
 		-INSTALAR DOCKER DESKTOP
 			CMD EJECUTAR: winget install -e --id Docker.DockerDesktop
@@ -35,7 +35,7 @@ La solución está preparada para funcionar:
 		Docker Compose version v2.34.0-desktop.1
 
 
-	## 1 CREAR LA API. O CLONARLA : MI PROYECTO SE LLAMA kafka-consumer-api
+	## CREAR LA API. O CLONARLA : MI PROYECTO SE LLAMA kafka-consumer-api
 		EN EL PROYECTO DEBE ESTAR EL ARCHIVO docker-compose.yml, FUERA DE LA SOLUCION Y DENTRO EL DOCKER FILE (PUBLIC LA API EN DOCKER)
 
 		## CREAR IMAGEN DENTRO DE DOCKER	
