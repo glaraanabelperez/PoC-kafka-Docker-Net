@@ -19,7 +19,7 @@ public class KafkaBackgroundConsumerService : BackgroundService
     {
         lock (_lock)
         {
-            return _mensajes.ToList(); // devolvemos una copia para seguridad
+            return _mensajes.ToList();
         }
     }
 
@@ -33,7 +33,7 @@ public class KafkaBackgroundConsumerService : BackgroundService
             {
                 BootstrapServers = _configuration["Kafka:BootstrapServers"],
                 GroupId = _configuration["Kafka:GroupId"],
-                AutoOffsetReset = AutoOffsetReset.Latest, // <--- esto es clave
+                AutoOffsetReset = AutoOffsetReset.Latest, // 
             };
 
             using var consumer = new ConsumerBuilder<Ignore, string>(config).Build();
@@ -49,7 +49,7 @@ public class KafkaBackgroundConsumerService : BackgroundService
                     var result = consumer.Consume(stoppingToken);
                     if (result != null)
                     {
-                        _logger.LogInformation($"📨 Mensaje recibido: {result.Message.Value}");
+                        _logger.LogInformation($"Mensaje recibido: {result.Message.Value}");
                         Console.WriteLine("mensaje: " + result.Message);
 
                         lock (_lock)
@@ -65,7 +65,7 @@ public class KafkaBackgroundConsumerService : BackgroundService
             }
             catch (OperationCanceledException)
             {
-                _logger.LogWarning("🛑 Consumo cancelado");
+                _logger.LogWarning("Consumo cancelado");
                 consumer.Close();
             }
             catch (Exception ex)

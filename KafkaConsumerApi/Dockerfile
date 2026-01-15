@@ -25,7 +25,6 @@ RUN apt-get update \
     && curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg
 
 COPY --from=publish /app/publish .
-COPY appsettings.json ./appsettings.json
 ENV ASPNETCORE_URLS=http://+:8082
 EXPOSE 8082
 ENTRYPOINT ["dotnet", "KafkaConsumerApi.dll"]

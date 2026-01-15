@@ -1,21 +1,23 @@
 ﻿{
-  "Kafka": {
-    "BootstrapServers": "kafka:29092", // Para uso local fuera de Docker
-    "Topic": "mi-topic",
-    "GroupId": "console-consumer-37469"
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information"
-    },
-    "Docker": {
-      "commandName": "Docker",
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "KafkaConsumerApi-Dev": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "swagger",
-      "publishAllPorts": true,
-      "useSSL": false
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "KafkaConsumerApi-Prod": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:8082",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
     }
   }
 }
