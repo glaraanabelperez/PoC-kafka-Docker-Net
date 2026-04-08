@@ -8,8 +8,8 @@
 Este proyecto implementa una API .NET que actúa únicamente como CONSUMER de Kafka. La API no expone endpoints de negocio, solo se levanta, se conecta a Kafka y escucha mensajes de un tópico configurado.
 
 La solución está preparada para funcionar:
-✅ Desde Visual Studio (Development / fuera de Docker)
-✅ Dentro de Docker (Production)
+✅ levantar Proyectos locales con Visual Studio
+✅ Levantar Kafka en  Docker (Production)
 
 
 ##LEVANTAR TODOS LOS PROCESOS Y LA API
