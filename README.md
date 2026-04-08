@@ -5,7 +5,7 @@
 <img width="1920" height="1080" alt="KAFKA (2)" src="https://github.com/user-attachments/assets/ad0ab1b6-0d5d-4010-966f-95db6074c996" />
 
 ## KafkaConsumerApi – .NET + Kafka + Docker
-Este proyecto implementa una API .NET que actúa únicamente como CONSUMER de Kafka. La API no expone endpoints de negocio, solo se levanta, se conecta a Kafka y escucha mensajes de un tópico configurado.
+Este proyecto implementa una API .NET que actúa únicamente como productor usando  Kafka. Loa mensajes son escuchados por una aplicacion de consola
 
 La solución está preparada para funcionar:
 ✅ levantar Proyectos locales con Visual Studio
